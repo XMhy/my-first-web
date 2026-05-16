@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenEnergy - Personal Profile</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f2eb;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        /* 页面容器 */
+        .profile-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* 顶部个人信息区 */
+        .profile-header {
+            background-color: #2980b9;
+            color: white;
+            padding: 50px 40px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        /* 大头像 */
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid white;
+            background: url('https://picsum.photos/id/104/150/150') no-repeat center;
+            background-size: contain;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .profile-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .profile-bio {
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+
+        /* 返回按钮 - 链接到lvse.html */
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 25px;
+            background-color: #27ae60;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #219653;
+        }
+
+        /* 个人详情区 */
+        .profile-details {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .detail-section h3 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #27ae60;
+        }
+
+        .detail-list {
+            list-style: none;
+        }
+
+        .detail-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .detail-list li i {
+            color: #27ae60;
+            font-size: 18px;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            padding: 6px 15px;
+            background-color: rgba(46, 204, 113, 0.1);
+            color: #27ae60;
+            border-radius: 20px;
+            margin: 0 8px 8px 0;
+        }
+
+        /* 成就展示区 */
+        .achievements {
+            padding: 0 40px 40px;
+        }
+
+        .achievements h3 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #27ae60;
+        }
+
+        .achievement-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .achievement-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+        }
+
+        .achievement-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .achievement-card p {
+            color: #7f8c8d;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+                padding: 30px 20px;
+            }
+
+            .profile-bio {
+                max-width: 100%;
+            }
+
+            .profile-details {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .achievements {
+                padding: 0 20px 20px;
+            }
+
+            .profile-name {
+                font-size: 28px;
+            }
+        }
+    </style>
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="profile-container">
+        <!-- 顶部个人信息 -->
+        <div class="profile-header">
+            <div class="profile-avatar"></div>
+            <div class="profile-info">
+                <h1 class="profile-name">GreenEnergy</h1>
+                <h2 class="profile-title">Sustainable Energy Solutions Provider</h2>
+                <p class="profile-bio">
+                    We are a leading organization dedicated to accelerating the global transition to renewable energy. 
+                    With over 14 years of experience, we specialize in developing and implementing sustainable energy 
+                    solutions that balance environmental responsibility with economic viability.
+                </p>
+                <!-- 返回按钮链接修改为lvse.html -->
+                <a href="lvse.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Main Page</a>
+            </div>
+        </div>
+
+        <!-- 个人/品牌详情 -->
+        <div class="profile-details">
+            <div class="detail-section">
+                <h3>Core Information</h3>
+                <ul class="detail-list">
+                    <li><i class="fas fa-calendar-alt"></i> Founded: 2010</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Headquarters: San Francisco, USA</li>
+                    <li><i class="fas fa-globe"></i> Operations: 30+ Countries</li>
+                    <li><i class="fas fa-users"></i> Team Size: 500+ Professionals</li>
+                    <li><i class="fas fa-envelope"></i> Email: contact@greenenergy.com</li>
+                    <li><i class="fas fa-phone"></i> Phone: +1 (555) 123-4567</li>
+                </ul>
+            </div>
+
+            <div class="detail-section">
+                <h3>Expertise & Skills</h3>
+                <div class="skills">
+                    <span class="skill-tag">Solar Energy</span>
+                    <span class="skill-tag">Wind Power</span>
+                    <span class="skill-tag">Hydroelectric</span>
+                    <span class="skill-tag">Geothermal</span>
+                    <span class="skill-tag">Energy Storage</span>
+                    <span class="skill-tag">Carbon Neutrality</span>
+                    <span class="skill-tag">Sustainability Consulting</span>
+                    <span class="skill-tag">Renewable Policy</span>
+                    <span class="skill-tag">Green Technology</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 成就展示 -->
+        <div class="achievements">
+            <h3>Key Achievements</h3>
+            <div class="achievement-cards">
+                <div class="achievement-card">
+                    <h4>Global Green Energy Award 2023</h4>
+                    <p>Recognized for outstanding contribution to renewable energy development in developing countries.</p>
+                </div>
+                <div class="achievement-card">
+                    <h4>Sustainability Leadership Award</h4>
+                    <p>Honored for industry-leading sustainability practices and carbon reduction initiatives.</p>
+                </div>
+                <div class="achievement-card">
+                    <h4>10GW Clean Energy Capacity</h4>
+                    <p>Successfully deployed over 10 gigawatts of renewable energy capacity worldwide.</p>
+                </div>
+                <div class="achievement-card">
+                    <h4>Net-Zero Commitment 2030</h4>
+                    <p>Pioneer in setting and achieving science-based carbon neutrality targets for operations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
