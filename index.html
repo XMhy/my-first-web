@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Energy - Sustainable Future</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        /* 页面整体布局 */
+        body {
+            display: flex;
+            background-color: #f5f2eb; /* 米色背景匹配参考图 */
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 左侧侧边栏 */
+        .sidebar {
+            width: 200px;
+            background-color: #ffffff;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+            z-index: 10;
+            position: fixed; /* 固定侧边栏，滚动时不消失 */
+            height: 100vh;
+        }
+
+        /* Logo/头像样式 - 添加点击交互 */
+        .avatar-container {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+            text-decoration: none; /* 移除链接下划线 */
+        }
+
+        .avatar-container:hover {
+            transform: scale(1.05);
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+            background: url('https://picsum.photos/id/104/80/80') no-repeat center;
+            background-size: contain;
+            border-radius: 50%;
+            border: 2px solid #2ecc71;
+            transition: border-color 0.3s ease;
+        }
+
+        .avatar-container:hover .avatar {
+            border-color: #27ae60;
+        }
+
+        .brand-name {
+            font-size: 22px;
+            color: #27ae60;
+            font-weight: 700;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+        }
+
+        /* 核心导航 */
+        .main-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 50px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            padding: 8px 0;
+            border-radius: 4px;
+        }
+
+        .nav-develop {
+            color: #27ae60;
+            font-weight: 600;
+            background-color: rgba(46, 204, 113, 0.1);
+        }
+
+        .nav-sustain {
+            color: #f39c12;
+        }
+
+        .nav-clean {
+            color: #3498db;
+        }
+
+        .main-nav a:hover {
+            transform: translateX(5px);
+            background-color: rgba(0,0,0,0.03);
+        }
+
+        /* 辅助导航 */
+        .sub-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .sub-nav a {
+            text-decoration: none;
+            color: #7f8c8d;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .sub-nav a:hover {
+            color: #27ae60;
+        }
+
+        /* 右侧主内容区 */
+        .main-content {
+            flex: 1;
+            margin-left: 200px; /* 给固定侧边栏留出空间 */
+        }
+
+        /* 顶部横幅区 - 添加ID用于跳转 */
+        #banner {
+            background-color: #2980b9; /* 蓝色主背景匹配参考图 */
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 40px;
+        }
+
+        /* 顶部标语 */
+        .header-text {
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            font-size: 24px;
+            letter-spacing: 0.5px;
+            font-weight: 300;
+        }
+
+        /* 功能标签栏 */
+        .tag-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            padding: 8px 25px;
+            border: 2px solid white;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tag.active {
+            background-color: #f39c12;
+            border-color: #f39c12;
+            position: relative;
+        }
+
+        /* 活跃标签的悬浮标注 */
+        .tag.active::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 15px 15px 0;
+            border-style: solid;
+            border-color: #f39c12 transparent transparent;
+        }
+
+        .tag:hover:not(.active) {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* 主体插画区 */
+        .illustration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .illustration img {
+            width: 80%;
+            max-width: 800px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+        }
+
+        /* 云朵装饰（匹配参考图风格） */
+        .cloud {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+
+        .cloud1 {
+            width: 80px;
+            height: 40px;
+            top: 100px;
+            left: 150px;
+            box-shadow: 20px 10px 0 white, -20px 10px 0 white;
+        }
+
+        .cloud2 {
+            width: 60px;
+            height: 30px;
+            top: 180px;
+            right: 200px;
+            box-shadow: 15px 8px 0 white, -15px 8px 0 white;
+        }
+
+        /* 各个内容板块样式 */
+        .content-section {
+            padding: 80px 50px;
+            min-height: 100vh;
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid;
+        }
+
+        /* 不同板块的标题颜色 */
+        #develop .section-title {
+            border-color: #27ae60;
+            color: #27ae60;
+        }
+
+        #sustain .section-title {
+            border-color: #f39c12;
+            color: #f39c12;
+        }
+
+        #clean .section-title {
+            border-color: #3498db;
+            color: #3498db;
+        }
+
+        #blogs .section-title,
+        #partners .section-title,
+        #about .section-title {
+            border-color: #7f8c8d;
+            color: #2c3e50;
+        }
+
+        .section-content {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #34495e;
+            max-width: 1000px;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .section-img {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            object-fit: cover;
+            margin: 30px 0;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 15px 20px;
+                position: relative;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .avatar-container {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .avatar {
+                margin-bottom: 0;
+                margin-right: 10px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .brand-name {
+                margin-bottom: 0;
+                font-size: 18px;
+            }
+
+            .main-nav, .sub-nav {
+                flex-direction: row;
+                margin-bottom: 0;
+                gap: 10px;
+            }
+
+            .header-text {
+                font-size: 18px;
+                padding: 20px 0;
+            }
+
+            .content-section {
+                padding: 40px 20px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .section-content {
+                font-size: 16px;
+            }
+
+            .section-img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 左侧侧边栏 -->
+    <div class="sidebar">
+        <!-- 头像容器 - 链接到个人主页 -->
+        <a href="profile.html" class="avatar-container">
+            <div class="avatar"></div>
+            <div class="brand-name">GreenEnergy</div>
+        </a>
+        
+        <!-- 核心导航 -->
+        <div class="main-nav">
+            <a href="#develop" class="nav-develop">Development</a>
+            <a href="#sustain" class="nav-sustain">Sustainability</a>
+            <a href="#clean" class="nav-clean">Clean Energy</a>
+        </div>
+        
+        <!-- 辅助导航 -->
+        <div class="sub-nav">
+            <a href="#blogs">Blogs</a>
+            <a href="#partners">Partners</a>
+            <a href="#about">About Us</a>
+        </div>
+    </div>
+
+    <!-- 右侧主内容区 -->
+    <div class="main-content">
+        <!-- 顶部横幅 - 添加ID用于跳转 -->
+        <div id="banner" class="banner">
+            <!-- 装饰云朵 -->
+            <div class="cloud cloud1"></div>
+            <div class="cloud cloud2"></div>
+
+            <!-- 顶部标语 -->
+            <div class="header-text">We Drive Clean Energy Development for a Sustainable Future</div>
+
+            <!-- 功能标签栏 -->
+            <div class="tag-bar">
+                <div class="tag" data-target="#develop">Attract</div>
+                <div class="tag active" data-target="#sustain">Sustainability</div>
+                <div class="tag" data-target="#clean">Cleanize</div>
+            </div>
+
+            <!-- 主体插画 -->
+            <div class="illustration">
+                <img src="https://picsum.photos/id/106/800/500" alt="Green Energy Illustration" id="main-illustration">
+            </div>
+        </div>
+
+        <!-- 1. Development 能源开发板块 -->
+        <div id="develop" class="content-section">
+            <h2 class="section-title">Energy Development</h2>
+            <div class="section-content">
+                <p>Our energy development division focuses on the research, design, and implementation of cutting-edge green energy solutions. We specialize in harnessing renewable resources to create reliable, cost-effective energy systems for both residential and commercial use.</p>
+                <img src="https://picsum.photos/id/119/800/400" alt="Energy Development" class="section-img">
+                <p>Our development projects include wind farm construction, solar panel installation networks, hydroelectric power systems, and geothermal energy extraction. We work closely with local communities and governments to ensure sustainable development practices are followed at every stage.</p>
+                <p>By leveraging advanced technology and innovative engineering, we aim to make green energy accessible to all, reducing reliance on fossil fuels and lowering carbon footprints across industries.</p>
+            </div>
+        </div>
+
+        <!-- 2. Sustainability 可持续发展板块 -->
+        <div id="sustain" class="content-section">
+            <h2 class="section-title">Sustainability</h2>
+            <div class="section-content">
+                <p>Sustainability is at the core of everything we do. Our sustainability initiatives focus on creating long-term value for both the environment and our stakeholders through responsible business practices.</p>
+                <img src="https://picsum.photos/id/106/800/400" alt="Sustainability" class="section-img">
+                <p>We implement circular economy principles in all our operations, minimizing waste and maximizing resource efficiency. Our sustainability framework includes carbon neutrality targets, water conservation programs, and biodiversity protection initiatives.</p>
+                <p>Our sustainability reporting is transparent and comprehensive, adhering to global standards such as GRI and SASB. We continuously measure and improve our environmental performance, setting ambitious targets for emissions reduction and renewable energy adoption.</p>
+            </div>
+        </div>
+
+        <!-- 3. Clean Energy 清洁能源板块 -->
+        <div id="clean" class="content-section">
+            <h2 class="section-title">Clean Energy</h2>
+            <div class="section-content">
+                <p>Clean energy is the foundation of our mission to create a sustainable future. We offer a comprehensive range of clean energy solutions tailored to meet the unique needs of our clients.</p>
+                <img src="https://picsum.photos/id/180/800/400" alt="Clean Energy" class="section-img">
+                <p>Our clean energy portfolio includes solar photovoltaic systems, wind turbines, biomass energy solutions, hydrogen fuel cells, and energy storage technologies. We provide end-to-end services from initial consultation and design to installation, maintenance, and monitoring.</p>
+                <p>We also offer energy efficiency audits and retrofitting services to help businesses and households reduce their energy consumption and transition to clean energy sources. Our team of experts works closely with clients to develop customized solutions that balance environmental impact, cost, and performance.</p>
+            </div>
+        </div>
+
+        <!-- 4. Blogs 博客板块 -->
+        <div id="blogs" class="content-section">
+            <h2 class="section-title">Industry Blogs</h2>
+            <div class="section-content">
+                <p>Our blog features the latest news, insights, and expert opinions on the green energy industry. We cover topics ranging from policy developments and technological innovations to case studies and best practices.</p>
+                <img src="https://picsum.photos/id/20/800/400" alt="Industry Blogs" class="section-img">
+                <p>Recent articles include: "The Future of Renewable Energy in 2025", "How to Make Your Business Carbon Neutral", "Policy Updates: Global Green Energy Initiatives", and "Technological Breakthroughs in Energy Storage".</p>
+                <p>Our blog is updated weekly by our team of industry experts, researchers, and sustainability professionals. We welcome guest contributions and encourage dialogue on the most pressing issues facing the green energy sector today.</p>
+            </div>
+        </div>
+
+        <!-- 5. Partners 合作伙伴板块 -->
+        <div id="partners" class="content-section">
+            <h2 class="section-title">Our Partners</h2>
+            <div class="section-content">
+                <p>We collaborate with a diverse network of partners to advance our mission of sustainable energy development. Our partners include technology providers, research institutions, government agencies, and community organizations.</p>
+                <img src="https://picsum.photos/id/42/800/400" alt="Our Partners" class="section-img">
+                <p>Key partnerships include joint research projects with leading universities, technology collaborations with renewable energy equipment manufacturers, and community partnerships with local environmental organizations. We also work with corporate partners to implement large-scale clean energy projects and sustainability initiatives.</p>
+                <p>Our partnership program is open to organizations that share our commitment to sustainability and innovation. We believe that collaboration is essential to driving meaningful change in the energy sector.</p>
+            </div>
+        </div>
+
+        <!-- 6. About Us 关于我们板块 -->
+        <div id="about" class="content-section">
+            <h2 class="section-title">About GreenEnergy</h2>
+            <div class="section-content">
+                <p>Founded in 2010, GreenEnergy is a leading provider of sustainable energy solutions with a mission to accelerate the global transition to clean energy. Headquartered in San Francisco, we operate in over 30 countries across North America, Europe, Asia, and Africa.</p>
+                <img src="https://picsum.photos/id/28/800/400" alt="About GreenEnergy" class="section-img">
+                <p>Our team of over 500 professionals includes engineers, scientists, policy experts, and sustainability specialists dedicated to developing innovative energy solutions that are both environmentally responsible and economically viable.</p>
+                <p>We are committed to corporate social responsibility and have pledged to achieve net-zero emissions across our operations by 2030. Our work has been recognized with numerous awards, including the Global Green Energy Award and the Sustainability Leadership Award.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. 标签切换功能（关联到对应板块）
+        const tags = document.querySelectorAll('.tag');
+        const illustrationImg = document.getElementById('main-illustration');
+        
+        tags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                // 移除所有active类
+                tags.forEach(t => t.classList.remove('active'));
+                // 给当前点击的标签添加active
+                tag.classList.add('active');
+                
+                // 根据标签切换插画
+                const tagText = tag.textContent.toLowerCase();
+                if (tagText === 'attract') {
+                    illustrationImg.src = 'https://picsum.photos/id/119/800/500'; // 风力发电主题
+                } else if (tagText === 'sustainability') {
+                    illustrationImg.src = 'https://picsum.photos/id/106/800/500'; // 综合绿色能源
+                } else if (tagText === 'cleanize') {
+                    illustrationImg.src = 'https://picsum.photos/id/180/800/500'; // 太阳能主题
+                }
+
+                // 标签点击后滚动到对应板块
+                const targetId = tag.getAttribute('data-target');
+                if (targetId) {
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 2. 平滑滚动（锚点链接）
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // 平滑滚动到目标板块
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 3. 页面加载时高亮当前可视区域的导航
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.content-section, #banner');
+            const navLinks = document.querySelectorAll('.main-nav a, .sub-nav a');
+            
+            let currentSectionId = '';
+            
+            // 找到当前可视区域的板块
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    currentSectionId = '#' + section.getAttribute('id');
+                }
+            });
+            
+            // 高亮对应导航链接
+            navLinks.forEach(link => {
+                link.style.fontWeight = 'normal';
+                link.style.backgroundColor = 'transparent';
+                
+                if (link.getAttribute('href') === currentSectionId) {
+                    link.style.fontWeight = '600';
+                    if (link.classList.contains('nav-develop')) {
+                        link.style.backgroundColor = 'rgba(46, 204, 113, 0.1)';
+                    } else if (link.classList.contains('nav-sustain')) {
+                        link.style.backgroundColor = 'rgba(243, 156, 18, 0.1)';
+                    } else if (link.classList.contains('nav-clean')) {
+                        link.style.backgroundColor = 'rgba(52, 152, 219, 0.1)';
+                    } else {
+                        link.style.backgroundColor = 'rgba(127, 140, 141, 0.1)';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
